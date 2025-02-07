@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Moment } from '../model/Moment';
-import { environment } from 'src/environments/environments';
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
