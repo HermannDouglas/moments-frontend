@@ -27,6 +27,8 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+.vscode/test.code-workspace
+.vscode/*.code-workspace
 
 # Miscellaneous
 /.angular/cache
