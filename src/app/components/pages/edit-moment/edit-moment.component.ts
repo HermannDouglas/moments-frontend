@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Moment } from 'src/app/model/Moment';
 import { MomentService } from 'src/app/services/moment.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-edit-moment',
@@ -16,6 +17,7 @@ export class EditMomentComponent implements OnInit {
     private momentService: MomentService,
     private router: Router,
     private route: ActivatedRoute,
+    private messageService: MessagesService
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +26,25 @@ export class EditMomentComponent implements OnInit {
     this.momentService.getMoment(id).subscribe((item) => {
       this.moment = item.data;
     });
+  }
+
+  async editHandler(momentData: Moment) {
+    const id = this.moment.id;
+
+    const formData = new FormData();
+
+    formData.append('title', momentData.title);
+    formData.append('description', momentData.description);
+
+    if (momentData.image) {
+      formData.append('image', momentData.image);
+    }
+
+    await this.momentService.updateMoment(id!, formData).subscribe();
+
+    this.messageService.add(`Moment ${id} foi atualizado com sucesso!`);
+
+    this.router.navigate(['/']);
   }
 
 }
